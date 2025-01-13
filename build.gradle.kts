@@ -45,7 +45,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
     // Util
-    implementation("kr.or.komca:utils:0.3.1")
+//    implementation("kr.or.komca:utils:0.3.1")
 
     implementation("org.springframework.boot:spring-boot-starter-validation")
 }
@@ -90,13 +90,5 @@ publishing {
 
 repositories {
     mavenLocal()    // Local 테스트 용
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/org-test-hk/komca-common-utils")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
-            password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
-        }
-    }
     mavenCentral()
 }
