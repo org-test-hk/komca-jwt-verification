@@ -39,12 +39,6 @@ public class JwtSecurityAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public ClientIpUtil clientIpUtil() {
-		return new ClientIpUtil();
-	}
-
-	@Bean
-	@ConditionalOnMissingBean
 	public TokenCommandService tokenCommandService(TokenCommandMapper tokenCommandMapper, TokenQueryMapper tokenQueryMapper, ClientIpUtil clientIpUtil) {
 		return new TokenCommandServiceImpl(tokenCommandMapper, tokenQueryMapper, clientIpUtil);
 	}
