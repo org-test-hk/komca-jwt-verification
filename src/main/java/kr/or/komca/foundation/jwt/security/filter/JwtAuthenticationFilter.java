@@ -57,14 +57,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider tokenProvider;
     private final TokenCommandService tokenCommandService;
     private final AuthenticationLogger authLogger;  // 로깅 전담 클래스
-    private final List<String> SKIP_URLS = Arrays.asList(SecurityURLConstants.PUBLIC_URLS);
 
     /**
      * 인증을 건너뛸 Public URL 목록
      * 이 URL들에 대해서는 JWT 토큰 검증을 수행하지 않음
      */
-
-
+    private final List<String> SKIP_URLS = Arrays.asList(SecurityURLConstants.PUBLIC_URLS);
 
     /**
      * JWT 인증 필터의 핵심 로직을 구현
