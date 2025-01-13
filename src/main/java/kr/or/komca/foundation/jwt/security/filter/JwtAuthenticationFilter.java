@@ -12,6 +12,7 @@ import kr.or.komca.foundation.jwt.exception.filterException.MissingFingerprintEx
 import kr.or.komca.foundation.jwt.exception.filterException.MissingTokenException;
 import kr.or.komca.foundation.jwt.exception.filterException.TokenValidationException;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
+import kr.or.komca.foundation.jwt.security.config.SecurityURLConstants;
 import kr.or.komca.foundation.jwt.security.constants.SecurityConstants;
 import kr.or.komca.foundation.jwt.security.jwt.JwtTokenProvider;
 import kr.or.komca.foundation.jwt.service.command.TokenCommandService;
@@ -56,19 +57,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider tokenProvider;
     private final TokenCommandService tokenCommandService;
     private final AuthenticationLogger authLogger;  // 로깅 전담 클래스
-    private final List<String> SKIP_URLS;
+    private final List<String> SKIP_URLS = Arrays.asList(SecurityURLConstants.PUBLIC_URLS);
 
     /**
      * 인증을 건너뛸 Public URL 목록
      * 이 URL들에 대해서는 JWT 토큰 검증을 수행하지 않음
      */
-//    private static final List<String> SKIP_URLS = Arrays.asList(
-//            "/api/public/v1/auth/login",
-//            "/api/public/v1/auth/signup",
-//            "/api/public/v1/auth/refresh",
-//            "/swagger-ui/**",
-//            "/v3/api-docs/**"
-//    );
+
+
 
     /**
      * JWT 인증 필터의 핵심 로직을 구현

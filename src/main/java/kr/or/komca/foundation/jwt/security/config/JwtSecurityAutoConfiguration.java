@@ -18,10 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -42,7 +39,7 @@ public class JwtSecurityAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public AuthenticationManager authenticationManager(
+	public AuthenticationManager authenticationManager (
 			CustomUserDetailsService userDetailsService,  // UserDetailsService 구현체
 			PasswordEncoder passwordEncoder) {
 
@@ -87,8 +84,7 @@ public class JwtSecurityAutoConfiguration {
 		return new JwtAuthenticationFilter(
 				tokenProvider,
 				tokenCommandService,
-				authenticationLogger,
-				Arrays.stream(SecurityURLConstants.PUBLIC_URLS).toList()
+				authenticationLogger
 		);
 	}
 
