@@ -73,7 +73,7 @@ publishing {
             from(components["java"])
             version = System.getenv("NEW_VERSION") ?: "0.0.1-SNAPSHOT"
             groupId = "kr.or.komca.foundation"
-            artifactId = "vertification"
+            artifactId = "verification"
 
             versionMapping {
                 usage("java-api") {
