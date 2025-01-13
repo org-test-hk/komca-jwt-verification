@@ -1,0 +1,27 @@
+package kr.or.komca.foundation.jwt.exception.filterException;
+
+
+import kr.or.komca.foundation.jwt.common.response.CommonResponseFoundation;
+import kr.or.komca.foundation.jwt.exception.ErrorCode.AuthErrorCode;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+
+
+// 기본 인증 예외
+@Getter
+public abstract class BaseAuthenticationException extends RuntimeException {
+	private final AuthErrorCode errorCode;
+
+	protected BaseAuthenticationException(AuthErrorCode errorCode) {
+		super(errorCode.getMessage());
+		this.errorCode = errorCode;
+	}
+
+	public CommonResponseFoundation<Void> toResponse() {
+		return CommonResponseFoundation.<Void>builder()
+				.status(HttpStatus.UNAUTHORIZED.value())
+				.code(errorCode.getCode())
+				.message(errorCode.getMessage())
+				.build();
+	}
+}

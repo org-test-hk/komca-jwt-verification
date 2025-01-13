@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 사용자 Command Mapper XML -->
+<mapper namespace="kr.or.komca.foundation.jwt.mapper.command.UserCommandMapper">
+	<!-- 사용자 등록 -->
+	<insert id="insertUser" parameterType="kr.or.komca.foundation.jwt.domain.entity.User"
+			useGeneratedKeys="true" keyColumn="USER_NO" keyProperty="userNo">
+		INSERT INTO t_user (
+			username,
+			password,
+			name,
+			email,
+			enabled,
+			reg_date
+		) VALUES (
+					 #{username},
+					 #{password},
+					 #{name},
+					 #{email},
+					 #{enabled},
+					 CURRENT_TIMESTAMP
+				 )
+	</insert>
+
+	<!-- 사용자 역할 매핑 등록 -->
+	<insert id="insertUserRole">
+		INSERT INTO t_user_role (
+			user_no,
+			role_no,
+			reg_date
+		) VALUES (
+					 #{userNo},
+					 #{roleNo},
+					 CURRENT_TIMESTAMP
+				 )
+	</insert>
+
+	<!-- 리프레시 토큰 저장 -->
+	<insert id="insertRefreshToken">
+		INSERT INTO t_refresh_token (
+			user_no,
+			token,
+			expires_at,
+			reg_date
+		) VALUES (
+					 #{userNo},
+					 #{token},
+					 #{expiresAt},
+					 CURRENT_TIMESTAMP
+				 )
+	</insert>
+</mapper>

@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.0.117:1521:XE  # Oracle DB ?? URL
+    username: komca                               # ??? ????
+    password: 1234                                # ??? ????
+    driver-class-name: oracle.jdbc.OracleDriver  # Oracle JDBC ????
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: kr.or.komca.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+
+jwt:
+  secret: RGV2ZWxvcG1lbnQgU3ByaW5nIEJvb3QgSldUIFNlY3JldCBLZXkgZm9yIFNpZ25pbmcgVG9rZW5z
+  access-token-validity: 1800    # 30? (? ??)
+  refresh-token-validity: 10800  # 3?? (? ??)
+
+# ?? ????? application.yml
+foundation:
+  security:
+    standalone: true  # ?? ?????? ?? ??? ?? true
+

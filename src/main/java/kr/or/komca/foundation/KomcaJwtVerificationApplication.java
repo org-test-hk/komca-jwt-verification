@@ -1,4 +1,4 @@
-package kr.or.komca.komcajwtverification;
+package kr.or.komca.foundation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,4 @@ public class KomcaJwtVerificationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KomcaJwtVerificationApplication.class, args);
 	}
-
 }
