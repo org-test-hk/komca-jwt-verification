@@ -34,4 +34,23 @@ public class CommonResponseFoundation<T> {
         this.data = data;
         this.message = errorDetail;
     }
+
+    public static <T> ResponseEntity<CommonResponseFoundation<T>> ok(T data) {
+        return ResponseEntity.ok(new CommonResponseFoundation<>(HttpStatus.OK.value(), null, data, null));
+    }
+
+    public static <T> ResponseEntity<CommonResponseFoundation<T>> created(T data) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CommonResponseFoundation<>(HttpStatus.CREATED.value(), null, data, null));
+    }
+
+    public static <T> ResponseEntity<CommonResponseFoundation<T>> error(HttpStatus status, String code) {
+        return ResponseEntity.status(status)
+                .body(new CommonResponseFoundation<>(status.value(), code, null, null));
+    }
+
+    public static <T> ResponseEntity<CommonResponseFoundation<T>> error(HttpStatus status, String code, Object errorDetail) {
+        return ResponseEntity.status(status)
+                .body(new CommonResponseFoundation<>(status.value(), code, null, errorDetail));
+    }
 }
