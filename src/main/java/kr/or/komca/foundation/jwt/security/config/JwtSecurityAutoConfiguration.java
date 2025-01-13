@@ -43,7 +43,7 @@ public class JwtSecurityAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public AuthenticationManager authenticationManager(
-			CustomUserDetailsService userDetailsService,  // 이 부분은 당신의 UserDetailsService 구현체
+			CustomUserDetailsService userDetailsService,  // UserDetailsService 구현체
 			PasswordEncoder passwordEncoder) {
 
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

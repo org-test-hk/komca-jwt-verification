@@ -71,9 +71,9 @@ publishing {
     publications {
         create<MavenPublication>("gpr") {
             from(components["java"])
-            version = System.getenv("VERSION") ?: "0.0.1-SNAPSHOT"
+            version = System.getenv("NEW_VERSION") ?: "0.0.1-SNAPSHOT"
             groupId = "kr.or.komca.foundation"
-            artifactId = "utils"
+            artifactId = "vertification"
 
             versionMapping {
                 usage("java-api") {
