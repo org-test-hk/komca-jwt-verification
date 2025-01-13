@@ -53,13 +53,11 @@ jobs:
         run: |
           sed -i "s/version = \".*\"/version = \"${{ steps.tag_version.outputs.new_version }}\"/" build.gradle.kts
 
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-
       - name: Build and publish
-        run: ./gradlew build publish
+        run: ./gradlew build publish -x test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}

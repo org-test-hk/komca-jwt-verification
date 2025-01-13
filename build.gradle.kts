@@ -5,7 +5,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "kr.or.komca"
+group = "kr.or.komca.foundation"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -72,7 +72,7 @@ publishing {
         create<MavenPublication>("gpr") {
             from(components["java"])
             version = System.getenv("VERSION") ?: "0.0.1-SNAPSHOT"
-            groupId = "kr.or.komca"
+            groupId = "kr.or.komca.foundation"
             artifactId = "utils"
 
             versionMapping {
