@@ -27,9 +27,9 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: patch    # 기본값은 patch 증가
+          default_bump: patch
           release_branches: main
-          tag_prefix: "v"  # 태그 prefix 추가.
+          tag_prefix: "v"
           custom_release_rules: |
             major:major:Major Changes
             BREAKING CHANGE:major:Breaking Changes
@@ -52,6 +52,13 @@ jobs:
       - name: Update version in build.gradle.kts
         run: |
           sed -i "s/version = \".*\"/version = \"${{ steps.tag_version.outputs.new_version }}\"/" build.gradle.kts
+
+      # GitHub Packages 인증 정보 설정 추가
+      - name: Setup Gradle Authentication
+        run: |
+          mkdir -p ~/.gradle
+          echo "gpr.user=${{ github.actor }}" >> ~/.gradle/gradle.properties
+          echo "gpr.key=${{ secrets.GITHUB_TOKEN }}" >> ~/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
