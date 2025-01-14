@@ -14,5 +14,4 @@ public interface TokenCommandMapper {
     int insertAccessToken(AccessToken accessToken);
     int insertTokenBlacklist(TokenBlacklist blacklist);
     int insertTokenAbnormalLog(TokenAbnormalLog log);
-    int updateAccessTokenDelYn(@Param("tokenId") Long tokenId);
 }
