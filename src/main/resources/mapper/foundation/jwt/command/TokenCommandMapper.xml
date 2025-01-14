@@ -41,7 +41,7 @@
 			user_agent, fingerprint, reg_date
 		) VALUES (
 					 #{tokenId}, #{userNo}, #{accessToken}, #{eventType},
-					 #{severityLevel}, #{details}::jsonb, #{occurredAt}, #{ipAddress},
+					 #{severityLevel}, #{details,jdbcType=VARCHAR}, #{occurredAt}, #{ipAddress},
 					 #{userAgent}, #{fingerprint}, CURRENT_TIMESTAMP
 				 )
 	</insert>
