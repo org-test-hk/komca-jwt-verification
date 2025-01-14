@@ -2,13 +2,13 @@ package kr.or.komca.foundation.jwt.service.command;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.or.komca.foundation.jwt.common.ip.util.ClientIpUtil;
-import kr.or.komca.foundation.jwt.domain.entity.AccessToken;
-import kr.or.komca.foundation.jwt.domain.entity.TokenAbnormalLog;
-import kr.or.komca.foundation.jwt.domain.entity.TokenBlacklist;
-import kr.or.komca.foundation.jwt.dto.TokenValidationResult;
 import kr.or.komca.foundation.jwt.mapper.command.TokenCommandMapper;
 import kr.or.komca.foundation.jwt.mapper.query.TokenQueryMapper;
 import kr.or.komca.foundation.jwt.security.constants.SecurityConstants;
+import kr.or.komca.komcadatacore.dto.auth.AccessToken;
+import kr.or.komca.komcadatacore.dto.auth.TokenAbnormalLog;
+import kr.or.komca.komcadatacore.dto.auth.TokenBlacklist;
+import kr.or.komca.komcadatacore.dto.auth.TokenValidationResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

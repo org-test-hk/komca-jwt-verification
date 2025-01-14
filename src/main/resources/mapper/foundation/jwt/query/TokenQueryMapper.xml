@@ -16,7 +16,7 @@
 		  AND del_yn = 'N'
 	</select>
 
-	<resultMap id="accessTokenResultMap" type="kr.or.komca.foundation.jwt.domain.entity.AccessToken">
+	<resultMap id="accessTokenResultMap" type="kr.or.komca.komcadatacore.dto.auth.AccessToken">
 		<id property="tokenId" column="TOKEN_ID"/>
 		<result property="userNo" column="USER_NO"/>
 		<result property="accessToken" column="ACCESS_TOKEN"/>
@@ -31,7 +31,7 @@
 		<result property="delYn" column="del_yn"/>
 	</resultMap>
 
-	<resultMap id="blacklistResultMap" type="kr.or.komca.foundation.jwt.domain.entity.TokenBlacklist">
+	<resultMap id="blacklistResultMap" type="kr.or.komca.komcadatacore.dto.auth.TokenBlacklist">
 		<id property="blacklistId" column="blacklist_id"/>
 		<result property="tokenId" column="token_id"/>
 		<result property="accessToken" column="access_token"/>

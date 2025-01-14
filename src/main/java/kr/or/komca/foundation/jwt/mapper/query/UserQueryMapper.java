@@ -1,7 +1,7 @@
 package kr.or.komca.foundation.jwt.mapper.query;
 
-import kr.or.komca.foundation.jwt.domain.entity.Role;
-import kr.or.komca.foundation.jwt.domain.entity.User;
+import kr.or.komca.komcadatacore.dto.auth.Role;
+import kr.or.komca.komcadatacore.dto.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

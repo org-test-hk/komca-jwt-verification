@@ -1,8 +1,9 @@
 package kr.or.komca.foundation.jwt.exception.filterException;
 
 
-import kr.or.komca.foundation.jwt.common.response.CommonResponseFoundation;
+
 import kr.or.komca.foundation.jwt.exception.ErrorCode.AuthErrorCode;
+import kr.or.komca.komcadatacore.dto.common.CommonResponse;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -17,11 +18,11 @@ public abstract class BaseAuthenticationException extends RuntimeException {
 		this.errorCode = errorCode;
 	}
 
-	public CommonResponseFoundation<Void> toResponse() {
-		return CommonResponseFoundation.<Void>builder()
+	public CommonResponse<Void> toResponse() {
+		return CommonResponse.<Void>builder()
 				.status(HttpStatus.UNAUTHORIZED.value())
 				.code(errorCode.getCode())
-				.message(errorCode.getMessage())
+				.errorDetail(errorCode.getMessage())
 				.build();
 	}
 }

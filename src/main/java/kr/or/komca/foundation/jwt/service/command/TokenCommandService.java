@@ -1,8 +1,8 @@
 package kr.or.komca.foundation.jwt.service.command;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.or.komca.foundation.jwt.domain.entity.AccessToken;
-import kr.or.komca.foundation.jwt.dto.TokenValidationResult;
+import kr.or.komca.komcadatacore.dto.auth.AccessToken;
+import kr.or.komca.komcadatacore.dto.auth.TokenValidationResult;
 
 /**
  * 토큰 관련 명령 처리 서비스 인터페이스

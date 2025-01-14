@@ -1,8 +1,8 @@
 package kr.or.komca.foundation.jwt.security.service;
 
-import kr.or.komca.foundation.jwt.domain.entity.Role;
-import kr.or.komca.foundation.jwt.domain.entity.User;
 import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
+import kr.or.komca.komcadatacore.dto.auth.Role;
+import kr.or.komca.komcadatacore.dto.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

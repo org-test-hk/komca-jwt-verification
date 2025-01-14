@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 토큰 Command Mapper XML -->
 <mapper namespace="kr.or.komca.foundation.jwt.mapper.command.TokenCommandMapper">
-	<insert id="insertAccessToken" parameterType="kr.or.komca.foundation.jwt.domain.entity.AccessToken"
+	<insert id="insertAccessToken" parameterType="kr.or.komca.komcadatacore.dto.auth.AccessToken"
 			useGeneratedKeys="true" keyColumn="TOKEN_ID" keyProperty="tokenId">
 		INSERT INTO t_access_token (
 			user_no, access_token, fingerprint, ip_address,
@@ -22,7 +22,7 @@
 				 )
 	</insert>
 
-	<insert id="insertTokenBlacklist" parameterType="kr.or.komca.foundation.jwt.domain.entity.TokenBlacklist"
+	<insert id="insertTokenBlacklist" parameterType="kr.or.komca.komcadatacore.dto.auth.TokenBlacklist"
 			useGeneratedKeys="true" keyColumn="BLACKLIST_ID" keyProperty="blacklistId">
 		INSERT INTO t_token_blacklist (
 			token_id, access_token, reason, blacklisted_at,
@@ -33,7 +33,7 @@
 				 )
 	</insert>
 
-	<insert id="insertTokenAbnormalLog" parameterType="kr.or.komca.foundation.jwt.domain.entity.TokenAbnormalLog"
+	<insert id="insertTokenAbnormalLog" parameterType="kr.or.komca.komcadatacore.dto.auth.TokenAbnormalLog"
 			useGeneratedKeys="true" keyColumn="LOG_ID" keyProperty="logId">
 		INSERT INTO t_token_abnormal_log (
 			token_id, user_no, access_token, event_type,

@@ -1,7 +1,8 @@
 package kr.or.komca.foundation.jwt.logging;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.or.komca.foundation.jwt.dto.TokenValidationResult;
+
+import kr.or.komca.komcadatacore.dto.auth.TokenValidationResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;

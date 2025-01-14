@@ -10,7 +10,9 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: kr.or.komca.foundation.jwt.domain
+  type-aliases-package: >
+    - kr.or.komca.foundation.jwt.domain
+    - kr.or.komca.komcadatacore.dto
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: NULL
