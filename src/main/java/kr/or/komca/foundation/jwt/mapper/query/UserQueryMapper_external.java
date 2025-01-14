@@ -12,7 +12,7 @@ import java.util.Optional;
  * 사용자 관련 조회 수행 Mapper
  */
 @Mapper
-public interface UserQueryMapper {
+public interface UserQueryMapper_external {
     /**
      * 사용자 정보 조회 (역할 포함)
      * @param username 사용자 아이디

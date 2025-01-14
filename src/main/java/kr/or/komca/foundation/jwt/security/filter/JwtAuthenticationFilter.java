@@ -1,11 +1,9 @@
 package kr.or.komca.foundation.jwt.security.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-//import kr.or.komca.foundation.jwt.common.response.CommonResponseFoundation;
 import kr.or.komca.foundation.jwt.dto.TokenValidationResult;
 import kr.or.komca.foundation.jwt.exception.filterException.InvalidTokenException;
 import kr.or.komca.foundation.jwt.exception.filterException.MissingFingerprintException;

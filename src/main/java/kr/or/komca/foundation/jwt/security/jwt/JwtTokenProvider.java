@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.SecurityException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.or.komca.foundation.jwt.domain.entity.AccessToken;
-import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
+import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper_external;
 import kr.or.komca.foundation.jwt.security.constants.SecurityConstants;
 import kr.or.komca.foundation.jwt.service.command.TokenCommandService;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
-    private final UserQueryMapper userQueryMapper;
+    private final UserQueryMapper_external userQueryMapperExternal;
     private Key key;
     private final TokenCommandService tokenCommandService;
 
@@ -194,7 +194,7 @@ public class JwtTokenProvider {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
 
-        kr.or.komca.foundation.jwt.domain.entity.User user = userQueryMapper.findByUsername(username)
+        kr.or.komca.foundation.jwt.domain.entity.User user = userQueryMapperExternal.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException("User not found: " + username));
 
         AccessToken accessToken = AccessToken.builder()
