@@ -2,7 +2,7 @@ package kr.or.komca.foundation.jwt.security.service;
 
 import kr.or.komca.foundation.jwt.domain.entity.Role;
 import kr.or.komca.foundation.jwt.domain.entity.User;
-import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper_external;
+import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserQueryMapper_external userQueryMapperExternal;
+    private final UserQueryMapper userQueryMapperExternal;
 
     @Override
     @Transactional(readOnly = true)

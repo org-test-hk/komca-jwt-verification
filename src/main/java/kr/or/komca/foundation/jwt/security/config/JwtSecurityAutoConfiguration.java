@@ -4,7 +4,7 @@ import kr.or.komca.foundation.jwt.common.ip.util.ClientIpUtil;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
 import kr.or.komca.foundation.jwt.mapper.command.TokenCommandMapper;
 import kr.or.komca.foundation.jwt.mapper.query.TokenQueryMapper;
-import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper_external;
+import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
 import kr.or.komca.foundation.jwt.security.filter.JwtAuthenticationFilter;
 import kr.or.komca.foundation.jwt.security.jwt.JwtProperties;
 import kr.or.komca.foundation.jwt.security.jwt.JwtTokenProvider;
@@ -51,7 +51,7 @@ public class JwtSecurityAutoConfiguration {
 	@ConditionalOnMissingBean
 	public JwtTokenProvider jwtTokenProvider(
 			JwtProperties jwtProperties,
-			UserQueryMapper_external userQueryMapperExternal,
+			UserQueryMapper userQueryMapperExternal,
 			TokenCommandService tokenCommandService) {
 		return new JwtTokenProvider(
 				jwtProperties,
