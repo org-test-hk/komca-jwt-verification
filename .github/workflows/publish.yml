@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      packages-pull: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,6 +67,7 @@ jobs:
       - name: Build and publish
         run: ./gradlew build publish -x test
         env:
+          GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}
           GITHUB_REPOSITORY: ${{ github.repository }}
