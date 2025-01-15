@@ -91,7 +91,7 @@ publishing {
 repositories {
     mavenLocal()    // Local 테스트 용
     maven {
-        name = "GitHubPackages-verification"
+        name = "GitHubPackages-data-core"
         url = uri("https://maven.pkg.github.com/org-test-hk/komca-data-core")
         credentials {
             username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
