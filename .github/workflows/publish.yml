@@ -58,7 +58,7 @@ jobs:
         run: |
           mkdir -p ~/.gradle
           echo "gpr.user=${{ github.actor }}" >> ~/.gradle/gradle.properties
-          echo "gpr.key=${{ secrets.GITHUB_TOKEN }}" >> ~/.gradle/gradle.properties
+          echo "gpr.key=${{ secrets.PAT }}" >> ~/.gradle/gradle.properties
 
       - name: Debug Credentials
         run: |
@@ -70,7 +70,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build and publish
-        run: ./gradlew build publish -x test --info
+        run: ./gradlew build publish -x test
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
