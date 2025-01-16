@@ -25,6 +25,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 
 // 대빵 필터 -> 얘를 통해서 인증됨.
@@ -57,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * 인증을 건너뛸 Public URL 목록
      * 이 URL들에 대해서는 JWT 토큰 검증을 수행하지 않음
      */
-    private final List<String> SKIP_URLS = Arrays.asList(SecurityURLConstants.PUBLIC_URLS);
+//    private final Set<String> SKIP_URLS;
 
     /**
      * JWT 인증 필터의 핵심 로직을 구현
@@ -74,10 +75,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             // 필터를 건너뛰어야 하는 경우 처리
-            if (shouldSkipFilter(request)) {
-                filterChain.doFilter(request, response);
-                return;
-            }
+//            if (shouldSkipFilter(request)) {
+//                filterChain.doFilter(request, response);
+//                return;
+//            }
 
             processAuthentication(request);
             filterChain.doFilter(request, response);
@@ -135,13 +136,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * @param request HTTP 요청
      * @return 필터를 건너뛸지 여부
      */
-    private boolean shouldSkipFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        return SKIP_URLS.stream().anyMatch(skipUrl ->
-                path.startsWith(skipUrl) || path.matches(skipUrl.replace("/**", ".*"))
-        );
-
-    }
+//    private boolean shouldSkipFilter(HttpServletRequest request) {
+//        String path = request.getRequestURI();
+//        return SKIP_URLS.stream().anyMatch(skipUrl ->
+//                path.startsWith(skipUrl) || path.matches(skipUrl.replace("/**", ".*"))
+//        );
+//    }
 
     /**
      * HTTP 요청의 Authorization 헤더에서 JWT 토큰을 추출

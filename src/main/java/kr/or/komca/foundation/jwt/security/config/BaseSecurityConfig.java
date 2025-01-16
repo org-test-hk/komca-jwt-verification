@@ -30,18 +30,52 @@ public abstract class BaseSecurityConfig {
 				.formLogin(AbstractHttpConfigurer::disable)
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.sessionManagement(session ->
-						session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+						session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				);
+
+		this.configurePermitAll(http);
+
+
+		http
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.exceptionHandling(handler ->
-						handler.accessDeniedHandler(securityExceptionHandler)
-								.authenticationEntryPoint(securityExceptionHandler));
+						handler
+								.accessDeniedHandler(securityExceptionHandler)
+								.authenticationEntryPoint(securityExceptionHandler)
+				);
+
+		// 인증 방식과 필터 추가
+		this.configureAuthentication(http);
 
 		// 각 서비스의 권한 설정 적용
-		configureAuthorization(http);
+		this.configureAuthorization(http);
 
 		return http.build();
 	}
 
-	// HttpSecurity를 직접 받아서 설정
+	/**
+	 * 인증방식과 필터 추가
+	 *
+	 * @param http
+	 * @throws Exception
+	 */
+	protected abstract void configureAuthentication(HttpSecurity http) throws Exception;
+
+	/**
+	 * 권한 설정 적용
+	 *
+	 * @param http
+	 * @throws Exception
+	 */
 	protected abstract void configureAuthorization(HttpSecurity http) throws Exception;
+
+	/**
+	 * 허용할 URL 작성
+	 * http.authorizeHttpRequests(auth -> auth
+	 * 		.requestMatchers(허용할 URL 목록)
+	 * );
+	 * @param http
+	 * @throws Exception
+	 */
+	protected abstract void configurePermitAll(HttpSecurity http) throws Exception;
 }
