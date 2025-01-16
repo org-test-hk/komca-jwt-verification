@@ -25,18 +25,16 @@ public abstract class BaseSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+		configureJwtFilterPatterns(jwtAuthenticationFilter);
+
 		http
 				.csrf(AbstractHttpConfigurer::disable)
 				.formLogin(AbstractHttpConfigurer::disable)
 				.httpBasic(AbstractHttpConfigurer::disable)
 				.sessionManagement(session ->
 						session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				);
-
-		this.configurePermitAll(http);
-
-
-		http
+				)
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.exceptionHandling(handler ->
 						handler
@@ -61,21 +59,21 @@ public abstract class BaseSecurityConfig {
 	 */
 	protected abstract void configureAuthentication(HttpSecurity http) throws Exception;
 
-	/**
-	 * 권한 설정 적용
-	 *
-	 * @param http
-	 * @throws Exception
-	 */
-	protected abstract void configureAuthorization(HttpSecurity http) throws Exception;
+	protected void configureJwtFilterPatterns(JwtAuthenticationFilter jwtAuthenticationFilter) {
+		jwtAuthenticationFilter.addSkipPatterns(SecurityURLConstants.PUBLIC_URLS);
+
+		addJwtFilterSkipPatterns(jwtAuthenticationFilter);
+	}
 
 	/**
-	 * 허용할 URL 작성
-	 * http.authorizeHttpRequests(auth -> auth
-	 * 		.requestMatchers(허용할 URL 목록)
-	 * );
-	 * @param http
-	 * @throws Exception
+	 * 허용 URL 등록
+	 * @param filter
 	 */
-	protected abstract void configurePermitAll(HttpSecurity http) throws Exception;
+	protected abstract void addJwtFilterSkipPatterns(JwtAuthenticationFilter filter);
+
+	/**
+	 * 권한 기반 필터링 (hasRole 등 사용)
+	 * @param httpSecurity
+	 */
+	protected abstract void configureAuthorization(HttpSecurity httpSecurity) throws Exception;
 }

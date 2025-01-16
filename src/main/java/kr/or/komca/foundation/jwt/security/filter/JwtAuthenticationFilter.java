@@ -9,7 +9,6 @@ import kr.or.komca.foundation.jwt.exception.filterException.MissingFingerprintEx
 import kr.or.komca.foundation.jwt.exception.filterException.MissingTokenException;
 import kr.or.komca.foundation.jwt.exception.filterException.TokenValidationException;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
-import kr.or.komca.foundation.jwt.security.config.SecurityURLConstants;
 import kr.or.komca.foundation.jwt.security.constants.SecurityConstants;
 import kr.or.komca.foundation.jwt.security.jwt.JwtTokenProvider;
 import kr.or.komca.foundation.jwt.service.command.TokenCommandService;
@@ -19,12 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -53,12 +55,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider tokenProvider;
     private final TokenCommandService tokenCommandService;
     private final AuthenticationLogger authLogger;  // 로깅 전담 클래스
+    private final PathMatcher pathMatcher = new AntPathMatcher();
 
     /**
      * 인증을 건너뛸 Public URL 목록
      * 이 URL들에 대해서는 JWT 토큰 검증을 수행하지 않음
      */
-//    private final Set<String> SKIP_URLS;
+    private final Set<String> skipPatterns = new HashSet<>();
+//    private final Set<String> skipPatterns = new HashSet<String>();
 
     /**
      * JWT 인증 필터의 핵심 로직을 구현
@@ -71,14 +75,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * @throws IOException I/O 처리 중 오류 발생시
      */
     @Override
+
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             // 필터를 건너뛰어야 하는 경우 처리
-//            if (shouldSkipFilter(request)) {
-//                filterChain.doFilter(request, response);
-//                return;
-//            }
+            if (shouldSkipFilter(request)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
 
             processAuthentication(request);
             filterChain.doFilter(request, response);
@@ -136,12 +141,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * @param request HTTP 요청
      * @return 필터를 건너뛸지 여부
      */
-//    private boolean shouldSkipFilter(HttpServletRequest request) {
-//        String path = request.getRequestURI();
-//        return SKIP_URLS.stream().anyMatch(skipUrl ->
-//                path.startsWith(skipUrl) || path.matches(skipUrl.replace("/**", ".*"))
-//        );
-//    }
+    private boolean shouldSkipFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+
+        return skipPatterns.stream()
+                .anyMatch(pattern -> pathMatcher.match(pattern, path));
+    }
+
+    public void addSkipPattern(String pattern) {
+        skipPatterns.add(pattern);
+    }
+
+    public void addSkipPatterns(String... patterns) {
+        skipPatterns.addAll(Arrays.asList(patterns));
+    }
 
     /**
      * HTTP 요청의 Authorization 헤더에서 JWT 토큰을 추출
