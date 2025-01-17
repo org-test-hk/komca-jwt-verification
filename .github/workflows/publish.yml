@@ -57,8 +57,8 @@ jobs:
       - name: Setup Gradle Authentication
         run: |
           mkdir -p ~/.gradle
-          echo "gpr.user=${{ github.actor }}" >> ~/.gradle/gradle.properties
-          echo "gpr.key=${{ secrets.PAT }}" >> ~/.gradle/gradle.properties
+          echo "gpr.user=Kun-9" >> ~/.gradle/gradle.properties
+          echo "gpr.key=${{ secrets.ORG_GITHUB_PAT }}" >> ~/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
