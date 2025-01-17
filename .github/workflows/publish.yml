@@ -60,19 +60,13 @@ jobs:
           echo "gpr.user=${{ github.actor }}" >> ~/.gradle/gradle.properties
           echo "gpr.key=${{ secrets.PAT }}" >> ~/.gradle/gradle.properties
 
-      - name: Debug Credentials
-        run: |
-          echo "GITHUB_ACTOR: ${{ github.actor }}"
-          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
-          echo "Has GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN != '' }}"
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build and publish
         run: ./gradlew build publish -x test
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_ACTOR: Kun-9
+          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT }}
           NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}
           GITHUB_REPOSITORY: ${{ github.repository }}

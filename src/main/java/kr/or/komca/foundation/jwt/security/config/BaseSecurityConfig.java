@@ -73,7 +73,7 @@ public abstract class BaseSecurityConfig {
 
 	/**
 	 * 권한 기반 필터링 (hasRole 등 사용)
-	 * @param httpSecurity
+	 * @param http
 	 */
-	protected abstract void configureAuthorization(HttpSecurity httpSecurity) throws Exception;
+	protected abstract void configureAuthorization(HttpSecurity http) throws Exception;
 }
