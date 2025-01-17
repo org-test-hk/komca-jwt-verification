@@ -53,6 +53,12 @@ jobs:
         run: |
           sed -i "s/version = \".*\"/version = \"${{ steps.tag_version.outputs.new_version }}\"/" build.gradle.kts
 
+      - name: Debug Credentials
+        run: |
+          echo "GITHUB_ACTOR: ${{ github.actor }}"
+          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+          echo "Has GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT != '' }}"
+
       # GitHub Packages 인증 정보 설정 추가
       - name: Setup Gradle Authentication
         run: |
