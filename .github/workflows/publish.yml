@@ -26,7 +26,7 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ORG_GITHUB_PAT }}
           default_bump: patch
           release_branches: main
           tag_prefix: "v"
@@ -63,7 +63,7 @@ jobs:
       - name: Setup Gradle Authentication
         run: |
           mkdir -p ~/.gradle
-          echo "gpr.user=Kun-9" >> ~/.gradle/gradle.properties
+          echo "gpr.user=KimMunjin" >> ~/.gradle/gradle.properties
           echo "gpr.key=${{ secrets.ORG_GITHUB_PAT }}" >> ~/.gradle/gradle.properties
 
       - name: Grant execute permission for gradlew
@@ -72,7 +72,7 @@ jobs:
       - name: Build and publish
         run: ./gradlew build publish -x test
         env:
-          GITHUB_ACTOR: Kun-9
+          GITHUB_ACTOR: KimMunjin
           GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT }}
           NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}
           GITHUB_REPOSITORY: ${{ github.repository }}
