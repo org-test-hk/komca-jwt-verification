@@ -1,8 +1,8 @@
 package kr.or.komca.foundation.jwt.security.service;
 
-import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
-import kr.or.komca.komcadatacore.dto.auth.Role;
-import kr.or.komca.komcadatacore.dto.user.User;
+import kr.or.komca.authcore.mapper.query.UserQueryMapper;
+import kr.or.komca.authcore.models.Role;
+import kr.or.komca.authcore.models.domain.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,10 +28,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userQueryMapperExternal.findByUsername(username)
                 .map(this::createUserDetails)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("AuthUser not found with username: " + username));
     }
 
-    private UserDetails createUserDetails(User user) {
+    private UserDetails createUserDetails(AuthUser user) {
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                 .map(Role::getRoleName)
                 .map(SimpleGrantedAuthority::new)

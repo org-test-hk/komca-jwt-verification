@@ -43,11 +43,15 @@ dependencies {
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
-    // Util
-//    implementation("kr.or.komca:utils:0.3.1")
-    implementation("kr.or.komca:komca-data-core:0.2.1")
-
     implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    // BOM 임포트
+    implementation(platform("kr.or.komca:dependencies-bom:0.0.9"))
+
+    // komca 라이브러리
+    implementation("kr.or.komca:komca-data-core")
+    implementation("kr.or.komca:auth-core")
+
 }
 
 tasks.withType<Test> {
@@ -89,7 +93,19 @@ publishing {
 
 
 repositories {
+    mavenCentral()
     mavenLocal()    // Local 테스트 용
+
+    // BOM
+    maven {
+        name = "GitHubPackages-bom"
+        url = uri("https://maven.pkg.github.com/org-test-hk/dependencies-bom")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
+            password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
+        }
+    }
+
     maven {
         name = "GitHubPackages-data-core"
         url = uri("https://maven.pkg.github.com/org-test-hk/komca-data-core")
@@ -98,5 +114,13 @@ repositories {
             password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
         }
     }
-    mavenCentral()
+
+    maven {
+        name = "GitHubPackages-auth-core"
+        url = uri("https://maven.pkg.github.com/org-test-hk/komca-auth-core")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
+            password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
+        }
+    }
 }

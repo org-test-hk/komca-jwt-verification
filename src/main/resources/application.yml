@@ -9,7 +9,9 @@ server:
   port: 8080
 
 mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
+  mapper-locations: > 
+    - classpath:mapper/**/*.xml
+    - classpath*:mapper/**/*.xml
   type-aliases-package: >
     - kr.or.komca.foundation.jwt.domain
     - kr.or.komca.komcadatacore.dto

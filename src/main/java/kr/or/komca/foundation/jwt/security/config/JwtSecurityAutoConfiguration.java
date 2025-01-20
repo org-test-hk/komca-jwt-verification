@@ -1,16 +1,16 @@
 package kr.or.komca.foundation.jwt.security.config;
 
-import kr.or.komca.foundation.jwt.common.ip.util.ClientIpUtil;
+import kr.or.komca.authcore.jwt.JwtProperties;
+import kr.or.komca.authcore.jwt.JwtTokenProvider;
+import kr.or.komca.authcore.mapper.command.TokenCommandMapper;
+import kr.or.komca.authcore.mapper.query.TokenQueryMapper;
+import kr.or.komca.authcore.mapper.query.UserQueryMapper;
+import kr.or.komca.authcore.service.command.TokenCommandService;
+import kr.or.komca.authcore.service.command.TokenCommandServiceImpl;
+import kr.or.komca.authcore.utils.ClientIpUtil;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
-import kr.or.komca.foundation.jwt.mapper.command.TokenCommandMapper;
-import kr.or.komca.foundation.jwt.mapper.query.TokenQueryMapper;
-import kr.or.komca.foundation.jwt.mapper.query.UserQueryMapper;
 import kr.or.komca.foundation.jwt.security.filter.JwtAuthenticationFilter;
-import kr.or.komca.foundation.jwt.security.jwt.JwtProperties;
-import kr.or.komca.foundation.jwt.security.jwt.JwtTokenProvider;
 import kr.or.komca.foundation.jwt.security.service.CustomUserDetailsService;
-import kr.or.komca.foundation.jwt.service.command.TokenCommandService;
-import kr.or.komca.foundation.jwt.service.command.TokenCommandServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

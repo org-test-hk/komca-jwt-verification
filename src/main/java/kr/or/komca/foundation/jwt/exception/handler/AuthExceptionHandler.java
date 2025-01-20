@@ -3,7 +3,7 @@
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import io.jsonwebtoken.JwtException;
 //import kr.or.komca.foundation.jwt.common.response.CommonResponseFoundation;
-//import kr.or.komca.foundation.jwt.exception.AuthException;
+//import kr.or.komca.foundation.jwt.exception.asis.AuthException;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.http.HttpStatus;

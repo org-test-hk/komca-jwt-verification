@@ -1,4 +1,4 @@
-package kr.or.komca.foundation.jwt.exception;
+package kr.or.komca.foundation.jwt.exception.asis;
 
 import org.springframework.http.HttpStatus;
 
