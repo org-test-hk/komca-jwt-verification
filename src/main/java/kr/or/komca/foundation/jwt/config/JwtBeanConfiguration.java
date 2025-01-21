@@ -1,7 +1,7 @@
 package kr.or.komca.foundation.jwt.config;
 
-import kr.or.komca.authcore.service.CustomUserDetailsService;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
+import kr.or.komca.foundation.jwt.service.CustomUserDetailsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -4,7 +4,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kr.or.komca.authcore.jwt.JwtTokenProvider;
 import kr.or.komca.authcore.jwt.constants.SecurityConstants;
 import kr.or.komca.authcore.mapper.command.TokenCommandMapper;
 import kr.or.komca.authcore.models.TokenValidationResult;
@@ -14,6 +13,7 @@ import kr.or.komca.foundation.jwt.exception.filterException.MissingFingerprintEx
 import kr.or.komca.foundation.jwt.exception.filterException.MissingTokenException;
 import kr.or.komca.foundation.jwt.exception.filterException.TokenValidationException;
 import kr.or.komca.foundation.jwt.logging.AuthenticationLogger;
+import kr.or.komca.foundation.jwt.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
