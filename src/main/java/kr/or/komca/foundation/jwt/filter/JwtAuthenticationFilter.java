@@ -1,4 +1,4 @@
-package kr.or.komca.foundation.jwt.security.filter;
+package kr.or.komca.foundation.jwt.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.or.komca.authcore.jwt.JwtTokenProvider;
 import kr.or.komca.authcore.jwt.constants.SecurityConstants;
+import kr.or.komca.authcore.mapper.command.TokenCommandMapper;
 import kr.or.komca.authcore.models.TokenValidationResult;
 import kr.or.komca.authcore.service.command.TokenCommandService;
 import kr.or.komca.foundation.jwt.exception.filterException.InvalidTokenException;
@@ -170,4 +171,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
 }

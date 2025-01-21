@@ -1,4 +1,4 @@
-package kr.or.komca.foundation.jwt.security.config;
+package kr.or.komca.foundation.jwt.config;
 
 public class SecurityURLConstants {
     // 인증 관련 URL

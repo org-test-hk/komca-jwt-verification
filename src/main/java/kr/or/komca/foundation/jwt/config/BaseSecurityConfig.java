@@ -1,7 +1,7 @@
-package kr.or.komca.foundation.jwt.security.config;
+package kr.or.komca.foundation.jwt.config;
 
 import kr.or.komca.foundation.jwt.exception.handler.SecurityExceptionHandler;
-import kr.or.komca.foundation.jwt.security.filter.JwtAuthenticationFilter;
+import kr.or.komca.foundation.jwt.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

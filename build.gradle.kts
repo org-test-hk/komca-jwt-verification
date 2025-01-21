@@ -50,7 +50,8 @@ dependencies {
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
-    implementation("kr.or.komca:auth-core")
+//    implementation("kr.or.komca:auth-core")
+    implementation("kr.or.komca:auth-core:0.0.1-SNAPSHOT")
 
 }
 
