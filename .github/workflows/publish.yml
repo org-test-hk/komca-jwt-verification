@@ -88,5 +88,3 @@ permissions:
 jobs:
   publish:
     uses: org-test-hk/komca-github-workflows/.github/workflows/publish.yml@main
-    secrets:
-      ORG_GITHUB_PAT: ${{ secrets.ORG_GITHUB_PAT }}
