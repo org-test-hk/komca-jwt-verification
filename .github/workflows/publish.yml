@@ -1,78 +1,86 @@
-# .github/workflows/publish.yml
-name: Publish Package
-
+## .github/workflows/publish.yml
+#name: Publish Package
+#
+#on:
+#  push:
+#    branches: [main]
+#
+#jobs:
+#  build-and-publish:
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: write
+#      packages: write
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'adopt'
+#
+#      - name: Generate new version
+#        id: tag_version
+#        uses: mathieudutour/github-tag-action@v6.1
+#        with:
+#          github_token: ${{ secrets.ORG_GITHUB_PAT }}
+#          default_bump: patch
+#          release_branches: main
+#          tag_prefix: "v"
+#          custom_release_rules: |
+#            major:major:Major Changes
+#            BREAKING CHANGE:major:Breaking Changes
+#            BREAKING-CHANGE:major:Breaking Changes
+#            feat:minor:Features
+#            feature:minor:Features
+#            minor:minor:Minor Changes
+#            enhance:minor:Enhancements
+#            improvement:minor:Improvements
+#            fix:patch:Bug Fixes
+#            patch:patch:Patches
+#            hotfix:patch:Hot Fixes
+#            bugfix:patch:Bug Fixes
+#            chore:patch:Chores
+#            refactor:patch:Refactoring
+#            docs:patch:Documentation
+#            style:patch:Styling
+#            test:patch:Testing
+#
+#      - name: Update version in build.gradle.kts
+#        run: |
+#          sed -i "s/version = \".*\"/version = \"${{ steps.tag_version.outputs.new_version }}\"/" build.gradle.kts
+#
+#      - name: Debug Credentials
+#        run: |
+#          echo "GITHUB_ACTOR: ${{ github.actor }}"
+#          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+#          echo "Has GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT != '' }}"
+#
+#      # GitHub Packages 인증 정보 설정 추가
+#      - name: Setup Gradle Authentication
+#        run: |
+#          mkdir -p ~/.gradle
+#          echo "gpr.user=KimMunjin" >> ~/.gradle/gradle.properties
+#          echo "gpr.key=${{ secrets.ORG_GITHUB_PAT }}" >> ~/.gradle/gradle.properties
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#
+#      - name: Build and publish
+#        run: ./gradlew build publish -x test
+#        env:
+#          GITHUB_ACTOR: KimMunjin
+#          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT }}
+#          NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}
+#          GITHUB_REPOSITORY: ${{ github.repository }}
+name: Call Publish Workflow
 on:
   push:
     branches: [main]
 
 jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-
-      - name: Generate new version
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.ORG_GITHUB_PAT }}
-          default_bump: patch
-          release_branches: main
-          tag_prefix: "v"
-          custom_release_rules: |
-            major:major:Major Changes
-            BREAKING CHANGE:major:Breaking Changes
-            BREAKING-CHANGE:major:Breaking Changes
-            feat:minor:Features
-            feature:minor:Features
-            minor:minor:Minor Changes
-            enhance:minor:Enhancements
-            improvement:minor:Improvements
-            fix:patch:Bug Fixes
-            patch:patch:Patches
-            hotfix:patch:Hot Fixes
-            bugfix:patch:Bug Fixes
-            chore:patch:Chores
-            refactor:patch:Refactoring
-            docs:patch:Documentation
-            style:patch:Styling
-            test:patch:Testing
-
-      - name: Update version in build.gradle.kts
-        run: |
-          sed -i "s/version = \".*\"/version = \"${{ steps.tag_version.outputs.new_version }}\"/" build.gradle.kts
-
-      - name: Debug Credentials
-        run: |
-          echo "GITHUB_ACTOR: ${{ github.actor }}"
-          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
-          echo "Has GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT != '' }}"
-
-      # GitHub Packages 인증 정보 설정 추가
-      - name: Setup Gradle Authentication
-        run: |
-          mkdir -p ~/.gradle
-          echo "gpr.user=KimMunjin" >> ~/.gradle/gradle.properties
-          echo "gpr.key=${{ secrets.ORG_GITHUB_PAT }}" >> ~/.gradle/gradle.properties
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build and publish
-        run: ./gradlew build publish -x test
-        env:
-          GITHUB_ACTOR: KimMunjin
-          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_PAT }}
-          NEW_VERSION: ${{ steps.tag_version.outputs.new_version }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+  publish:
+    uses: org-test-hk/komca-github-workflows/.github/workflows/publish.yml@main
