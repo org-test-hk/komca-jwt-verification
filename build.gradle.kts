@@ -46,12 +46,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // BOM 임포트
-    implementation(platform("kr.or.komca:dependencies-bom:0.2.0"))
+    implementation(platform("kr.or.komca:dependencies-bom:0.0.9"))
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
-    implementation("kr.or.komca:auth-core")
-//    implementation("kr.or.komca:auth-core:0.0.1-SNAPSHOT")
+//    implementation("kr.or.komca:auth-core")
+    implementation("kr.or.komca:auth-core:0.0.1-SNAPSHOT")
 
 }
 

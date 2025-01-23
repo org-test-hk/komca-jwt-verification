@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- User ResultMap -->
-	<resultMap id="userResultMap" type="kr.or.komca.authcore.models.domain.AuthUser">
+	<resultMap id="userResultMap" type="kr.or.komca.foundation.jwt.domain.models.auth.AuthUser">
 		<id property="userNo" column="user_no"/>
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
@@ -46,14 +46,14 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="modDate" column="mod_date"/>
 		<result property="delYn" column="del_yn"/>
-		<collection property="roles" ofType="kr.or.komca.authcore.models.Role">
+		<collection property="roles" ofType="kr.or.komca.foundation.jwt.domain.models.auth.Role">
 			<id property="roleNo" column="role_no"/>
 			<result property="roleName" column="role_name"/>
 			<result property="description" column="role_description"/>
 			<result property="regDate" column="role_reg_date"/>
 			<result property="modDate" column="role_mod_date"/>
 			<result property="delYn" column="role_del_yn"/>
-			<collection property="permissions" ofType="kr.or.komca.authcore.models.Permission">
+			<collection property="permissions" ofType="kr.or.komca.foundation.jwt.domain.models.auth.Permission">
 				<id property="permissionNo" column="permission_no"/>
 				<result property="permissionName" column="permission_name"/>
 				<result property="description" column="permission_description"/>

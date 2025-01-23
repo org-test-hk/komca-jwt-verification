@@ -1,7 +1,7 @@
 package kr.or.komca.foundation.jwt.service.command;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.or.komca.authcore.models.TokenValidationResult;
+import kr.or.komca.foundation.jwt.domain.models.token.TokenValidationResult;
 
 
 /**

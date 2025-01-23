@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 토큰 Command Mapper XML -->
 <mapper namespace="kr.or.komca.foundation.jwt.mapper.command.TokenVerificationCommandMapper">
-    <insert id="insertTokenAbnormalLog" parameterType="kr.or.komca.authcore.models.TokenAbnormalLog"
+    <insert id="insertTokenAbnormalLog" parameterType="kr.or.komca.foundation.jwt.domain.models.token.TokenAbnormalLog"
             useGeneratedKeys="true" keyColumn="LOG_ID" keyProperty="logId">
         INSERT INTO t_token_abnormal_log (
             token_id, user_no, access_token, event_type,

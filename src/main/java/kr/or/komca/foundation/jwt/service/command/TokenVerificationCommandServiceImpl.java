@@ -1,15 +1,13 @@
 package kr.or.komca.foundation.jwt.service.command;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.or.komca.authcore.jwt.constants.SecurityConstants;
-
-
-import kr.or.komca.authcore.mapper.command.TokenCommandMapper;
-import kr.or.komca.authcore.mapper.query.TokenQueryMapper;
-import kr.or.komca.authcore.models.AccessToken;
-import kr.or.komca.authcore.models.TokenAbnormalLog;
-import kr.or.komca.authcore.models.TokenValidationResult;
-import kr.or.komca.authcore.utils.ClientIpUtil;
+import kr.or.komca.foundation.jwt.domain.models.token.AccessToken;
+import kr.or.komca.foundation.jwt.domain.models.token.TokenAbnormalLog;
+import kr.or.komca.foundation.jwt.domain.models.token.TokenValidationResult;
+import kr.or.komca.foundation.jwt.global.jwt.constants.SecurityConstants;
+import kr.or.komca.foundation.jwt.global.utils.ip.ClientIpUtil;
+import kr.or.komca.foundation.jwt.mapper.command.TokenVerificationCommandMapper;
+import kr.or.komca.foundation.jwt.mapper.query.TokenQueryMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TokenVerificationCommandServiceImpl implements TokenVerificationCommandService {
 
-    private final TokenCommandMapper tokenCommandMapper;
+    private final TokenVerificationCommandMapper tokenCommandMapper;
     private final TokenQueryMapper tokenQueryMapper;
     private final ClientIpUtil clientIpUtil;
 
