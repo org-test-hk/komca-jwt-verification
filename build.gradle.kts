@@ -46,7 +46,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // BOM 임포트
-    implementation(platform("kr.or.komca:dependencies-bom:0.3.0"))
+    implementation(platform("kr.or.komca:dependencies-bom:0.4.2"))
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
@@ -56,6 +56,12 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.jar {
+    from("src/main/resources") {
+        include("jwt-config.yml")
+        into("META-INF/resources/")
+    }
+}
 
 publishing {
     repositories {
