@@ -50,6 +50,8 @@ dependencies {
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
+
+    implementation("kr.or.komca:interface:0.0.1-SNAPSHOT")
 }
 
 tasks.withType<Test> {
@@ -91,8 +93,8 @@ publishing {
 
 
 repositories {
-    mavenCentral()
     mavenLocal()    // Local 테스트 용
+    mavenCentral()
 
     // BOM
     maven {
@@ -115,7 +117,16 @@ repositories {
 
     maven {
         name = "GitHubPackages-auth-core"
-        url = uri("https://maven.pkg.github.com/org-test-hk/komca-auth-core")
+        url = uri("https://maven.pkg.github.com/org-test-hk/komca-common-exception")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
+            password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
+        }
+    }
+
+    maven {
+        name = "GitHubPackages-auth-core"
+        url = uri("https://maven.pkg.github.com/org-test-hk/komca-common-interface")
         credentials {
             username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
             password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""

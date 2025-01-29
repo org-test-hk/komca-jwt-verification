@@ -35,6 +35,7 @@ public class User {
     private boolean enabled;
 
     /** 역할 목록 */
+    @Builder.Default
     private List<RoleType> roles = new ArrayList<>();
 
     /** 등록일시 */
