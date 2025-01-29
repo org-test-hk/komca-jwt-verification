@@ -20,6 +20,8 @@ public enum AuthErrorCode implements ErrorCode {
 	TOKEN_EXPIRED("AUTH004", HttpStatus.UNAUTHORIZED),
 	TOKEN_VALIDATION_FAILED("AUTH005", HttpStatus.UNAUTHORIZED),
 	Role_NOT_FOUND("AUTH006", HttpStatus.UNAUTHORIZED),
+	ACCESS_DENIED("AUTH007", HttpStatus.FORBIDDEN),  // 권한 부족
+	LOGIN_REQUIRED("AUTH008", HttpStatus.UNAUTHORIZED),  // 로그인 필요
 	AUTHENTICATION_ERROR("AUTH999", HttpStatus.UNAUTHORIZED);
 
 	private final String code;

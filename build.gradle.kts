@@ -1,5 +1,6 @@
 plugins {
     java
+    id("java-library")
     id("org.springframework.boot") version "3.2.11"
     id("io.spring.dependency-management") version "1.1.6"
     id("maven-publish")
@@ -51,7 +52,8 @@ dependencies {
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
 
-    implementation("kr.or.komca:interface:0.0.1-SNAPSHOT")
+    api("kr.or.komca:interface:0.1.0")
+
 }
 
 tasks.withType<Test> {
@@ -115,15 +117,6 @@ repositories {
     maven {
         name = "GitHubPackages-data-core"
         url = uri("https://maven.pkg.github.com/org-test-hk/komca-data-core")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
-            password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
-        }
-    }
-
-    maven {
-        name = "GitHubPackages-auth-core"
-        url = uri("https://maven.pkg.github.com/org-test-hk/komca-common-exception")
         credentials {
             username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""
             password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") as String? ?: ""
