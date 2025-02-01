@@ -8,24 +8,23 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum AuthErrorCode implements ErrorCode {
-//	TOKEN_MISSING("AUTH001", "No token found"),
-//	FINGERPRINT_MISSING("AUTH002", "Missing fingerprint"),
-//	TOKEN_INVALID("AUTH003", "Invalid token signature"),
-//	TOKEN_EXPIRED("AUTH004", "Token has expired"),
-//	TOKEN_VALIDATION_FAILED("AUTH005", "Token validation failed"),
-//	AUTHENTICATION_ERROR("AUTH999", "Authentication processing error");
-	TOKEN_MISSING("AUTH001", HttpStatus.UNAUTHORIZED),
-	FINGERPRINT_MISSING("AUTH002", HttpStatus.UNAUTHORIZED),
-	TOKEN_INVALID("AUTH003", HttpStatus.UNAUTHORIZED),
-	TOKEN_EXPIRED("AUTH004", HttpStatus.UNAUTHORIZED),
-	TOKEN_VALIDATION_FAILED("AUTH005", HttpStatus.UNAUTHORIZED),
-	Role_NOT_FOUND("AUTH006", HttpStatus.UNAUTHORIZED),
-	ACCESS_DENIED("AUTH007", HttpStatus.FORBIDDEN),  // 권한 부족
-	LOGIN_REQUIRED("AUTH008", HttpStatus.UNAUTHORIZED),  // 로그인 필요
-	AUTHENTICATION_ERROR("AUTH999", HttpStatus.UNAUTHORIZED);
+	// 토큰 검증 관련
+	TOKEN_MISSING("TOKEN_MISSING", HttpStatus.UNAUTHORIZED),
+	FINGERPRINT_MISSING("FINGERPRINT_MISSING", HttpStatus.UNAUTHORIZED),
+	TOKEN_INVALID("TOKEN_INVALID", HttpStatus.UNAUTHORIZED),
+	TOKEN_EXPIRED("TOKEN_EXPIRED", HttpStatus.UNAUTHORIZED),
+	TOKEN_VALIDATION_FAILED("TOKEN_VALIDATION_FAILED", HttpStatus.UNAUTHORIZED),
+	INVALID_REFRESH_TOKEN("INVALID_REFRESH_TOKEN", HttpStatus.UNAUTHORIZED),
+
+	// 권한 관련
+	ACCESS_DENIED("ACCESS_DENIED", HttpStatus.FORBIDDEN),  // 권한 부족
+	LOGIN_REQUIRED("LOGIN_REQUIRED", HttpStatus.UNAUTHORIZED),  // 로그인 필요
+
+	// 시스템 관련
+	AUTHENTICATION_ERROR("AUTHENTICATION_ERROR", HttpStatus.UNAUTHORIZED);
+
 
 	private final String code;
 	private final HttpStatus status;
-
 
 }

@@ -4,7 +4,6 @@ import kr.or.komca.foundation.jwt.domain.dto.response.FilterErrorResponse;
 import kr.or.komca.foundation.jwt.global.exception.filterException.BaseAuthenticationException;
 import kr.or.komca.foundation.jwt.global.logging.AuthenticationLogger;
 import kr.or.komca.komcacommoninterface.dto.BaseResponse;
-import kr.or.komca.komcadatacore.dto.common.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

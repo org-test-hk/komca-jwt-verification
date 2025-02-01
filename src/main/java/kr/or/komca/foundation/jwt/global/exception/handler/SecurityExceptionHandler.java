@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.or.komca.foundation.jwt.domain.dto.response.FilterErrorResponse;
 import kr.or.komca.foundation.jwt.global.exception.ErrorCode.AuthErrorCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -18,11 +17,6 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.springframework.boot.convert.ApplicationConversionService.configure;
 
 @Slf4j
 @Component
@@ -37,11 +31,14 @@ public class SecurityExceptionHandler implements AuthenticationEntryPoint, Acces
 				.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 	}
 
+	/** 인증되지 않은 사용자의 요청 처리 */
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 		sendErrorResponse(response, AuthErrorCode.LOGIN_REQUIRED);
 	}
 
+
+	/** 접근 권한이 없는 요청 처리 */
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		sendErrorResponse(response, AuthErrorCode.ACCESS_DENIED);

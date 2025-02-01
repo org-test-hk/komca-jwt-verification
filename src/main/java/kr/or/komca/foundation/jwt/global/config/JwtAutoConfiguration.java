@@ -1,5 +1,6 @@
 package kr.or.komca.foundation.jwt.global.config;
 
+import kr.or.komca.foundation.jwt.global.exception.handler.GlobalExceptionHandler;
 import kr.or.komca.foundation.jwt.global.exception.handler.SecurityExceptionHandler;
 import kr.or.komca.foundation.jwt.global.filter.JwtAuthenticationFilter;
 import kr.or.komca.foundation.jwt.global.jwt.JwtProperties;
@@ -111,5 +112,11 @@ public class JwtAutoConfiguration {
 	@ConditionalOnMissingBean
 	public AuthenticationLogger authenticationLogger() {
 		return new AuthenticationLogger();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public GlobalExceptionHandler globalExceptionHandler(AuthenticationLogger authenticationLogger) {
+		return new GlobalExceptionHandler(authenticationLogger);
 	}
 }
