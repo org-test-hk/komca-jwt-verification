@@ -47,12 +47,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // BOM 임포트
-    implementation(platform("kr.or.komca:dependencies-bom:0.4.2"))
+    implementation(platform("kr.or.komca:dependencies-bom:0.4.6"))
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
 
-    api("kr.or.komca:interface:0.1.0")
+    api("kr.or.komca:interface:0.2.0")
+
+//    api("kr.or.komca:interface:0.0.1-SNAPSHOT")
 
 }
 
@@ -124,7 +126,7 @@ repositories {
     }
 
     maven {
-        name = "GitHubPackages-auth-core"
+        name = "GitHubPackages-common-interface"
         url = uri("https://maven.pkg.github.com/org-test-hk/komca-common-interface")
         credentials {
             username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") as String? ?: ""

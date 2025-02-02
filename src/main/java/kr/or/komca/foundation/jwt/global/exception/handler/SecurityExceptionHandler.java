@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.or.komca.foundation.jwt.domain.dto.response.FilterErrorResponse;
 import kr.or.komca.foundation.jwt.global.exception.ErrorCode.AuthErrorCode;
+import kr.or.komca.komcacommoninterface.dto.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -17,6 +18,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -69,8 +71,17 @@ public class SecurityExceptionHandler implements AuthenticationEntryPoint, Acces
 		response.setStatus(errorCode.getStatus().value());
 		response.setContentType("application/json;charset=UTF-8");
 
-		// FilterErrorResponse를 직접 생성하고 ObjectMapper로 직렬화
-		String json = objectMapper.writeValueAsString(FilterErrorResponse.of(errorCode).getBody());
+		// FilterErrorResponse의 정적 팩토리 메서드 사용
+		BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
+				.code(errorCode.getCode())
+				.build();
+
+		BaseResponse<Void> errorResponse = FilterErrorResponse.of(
+				errorCode,
+				List.of(errorDetail)
+		).getBody();
+
+		String json = objectMapper.writeValueAsString(errorResponse);
 		response.getWriter().write(json);
 	}
 }

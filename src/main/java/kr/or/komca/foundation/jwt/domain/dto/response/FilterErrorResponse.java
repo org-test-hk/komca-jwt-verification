@@ -7,28 +7,53 @@ import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
 public class FilterErrorResponse extends BaseResponse<Void> {
 
-    protected FilterErrorResponse() {
-        super();  // 기본 생성자 호출
-    }
 
-    private FilterErrorResponse(ErrorCode errorCode, Object errorDetail) {
-        super(errorCode, null, errorDetail);
+    private FilterErrorResponse(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
+        super(errorCode.getStatus().value(), errorCode.getCode(), errorDetails);
     }
 
     public static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode) {
-        Map<String, String> errors = new HashMap<>();
-        errors.put("error", errorCode.getCode());
-        return ResponseEntity.status(errorCode.getStatus())
-                .body(new FilterErrorResponse(errorCode, errors));
+        BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
+                .code(errorCode.getCode())
+                .build();
+
+        return of(errorCode, List.of(errorDetail));
     }
 
-    public static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode, Object errorDetail) {
-        return ResponseEntity.status(errorCode.getStatus())
-                .body(new FilterErrorResponse(errorCode, errorDetail));
+    public static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode, Object errorData) {
+        Map<String, Object> params = new HashMap<>();
+        if (errorData != null) {
+            if (errorData instanceof Map<?, ?> map) {  // Java 16+ pattern matching
+                // 모든 키가 String인지 확인
+                if (map.keySet().stream().allMatch(key -> key instanceof String)) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> typedMap = (Map<String, Object>) map;
+                    params.putAll(typedMap);
+                } else {
+                    params.put("detail", errorData);
+                }
+            } else {
+                params.put("detail", errorData);
+            }
+        }
+
+        BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
+                .code(errorCode.getCode())
+                .params(params.isEmpty() ? null : params)
+                .build();
+
+        return of(errorCode, List.of(errorDetail));
+    }
+
+    private static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
+        return ResponseEntity
+                .status(errorCode.getStatus())
+                .body(new FilterErrorResponse(errorCode, errorDetails));
     }
 }

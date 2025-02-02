@@ -24,9 +24,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 // 대빵 필터 -> 얘를 통해서 인증됨.
@@ -115,10 +113,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         // 비즈니스 규칙 검증 (블랙리스트, Fingerprint, IP 등)
+//        TokenValidationResult validationResult = tokenVerificationCommandService.validateToken(jwt, request);
+//        if (!validationResult.isValid()) {
+//            authLogger.logValidationFailure(request, jwt, validationResult);
+//            throw new TokenValidationException(validationResult.getErrorMessage());
+//        }
         TokenValidationResult validationResult = tokenVerificationCommandService.validateToken(jwt, request);
         if (!validationResult.isValid()) {
             authLogger.logValidationFailure(request, jwt, validationResult);
-            throw new TokenValidationException(validationResult.getErrorMessage());
+            Map<String, Object> details = new HashMap<>();
+            details.put("message", validationResult.getErrorMessage());
+            if (!validationResult.getWarnings().isEmpty()) {
+                details.put("warnings", validationResult.getWarnings());
+            }
+            throw new TokenValidationException(details);  // TokenValidationException도 Map을 받도록 수정
         }
 
         // 경고가 있는 경우 로깅 (IP 변경 등)
