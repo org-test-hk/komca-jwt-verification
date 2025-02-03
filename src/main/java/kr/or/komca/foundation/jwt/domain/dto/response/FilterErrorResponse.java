@@ -1,59 +1,53 @@
 package kr.or.komca.foundation.jwt.domain.dto.response;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import kr.or.komca.komcacommoninterface.dto.BaseResponse;
 import kr.or.komca.komcacommoninterface.response_code.ErrorCode;
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
-public class FilterErrorResponse extends BaseResponse<Void> {
+public class FilterErrorResponse extends BaseResponse {
 
+    private final List<ErrorDetail> errorDetails;
+    private final String code;
+
+    public static ResponseEntity<BaseResponse> from(ErrorCode errorCode) {
+        return ResponseEntity
+                .status(errorCode.getStatus())
+                .body(new FilterErrorResponse(
+                        errorCode,
+                        List.of(new ErrorDetail(errorCode.getCode(), null)))
+                );
+    }
 
     private FilterErrorResponse(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
-        super(errorCode.getStatus().value(), errorCode.getCode(), errorDetails);
+        super(errorCode.getStatusCode());
+        this.errorDetails = errorDetails;
+        this.code = errorCode.getCode();
     }
 
-    public static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode) {
-        BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
-                .code(errorCode.getCode())
-                .build();
-
-        return of(errorCode, List.of(errorDetail));
-    }
-
-    public static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode, Object errorData) {
-        Map<String, Object> params = new HashMap<>();
-        if (errorData != null) {
-            if (errorData instanceof Map<?, ?> map) {  // Java 16+ pattern matching
-                // 모든 키가 String인지 확인
-                if (map.keySet().stream().allMatch(key -> key instanceof String)) {
-                    @SuppressWarnings("unchecked")
-                    Map<String, Object> typedMap = (Map<String, Object>) map;
-                    params.putAll(typedMap);
-                } else {
-                    params.put("detail", errorData);
-                }
-            } else {
-                params.put("detail", errorData);
-            }
-        }
-
-        BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
-                .code(errorCode.getCode())
-                .params(params.isEmpty() ? null : params)
-                .build();
-
-        return of(errorCode, List.of(errorDetail));
-    }
-
-    private static ResponseEntity<BaseResponse<Void>> of(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
+    public static ResponseEntity<BaseResponse> of(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
         return ResponseEntity
                 .status(errorCode.getStatus())
                 .body(new FilterErrorResponse(errorCode, errorDetails));
+    }
+
+    @Getter
+    @Builder
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class ErrorDetail {
+        private final String code;         // 에러 상세 코드
+        private final Object value;        // 실제 입력값 (옵션)
+    }
+
+    @Override
+    public ResponseEntity<FilterErrorResponse> toResponseEntity() {
+        return ResponseEntity.status(this.statusCode).body(this);
     }
 }

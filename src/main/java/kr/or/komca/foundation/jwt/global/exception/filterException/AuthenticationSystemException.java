@@ -11,7 +11,7 @@ import java.util.Map;
 //}
 public class AuthenticationSystemException extends BaseAuthenticationException {
 	public AuthenticationSystemException(Exception e) {
-		super(AuthErrorCode.AUTHENTICATION_ERROR, Map.of("cause", e.getMessage()));
+		super(AuthErrorCode.AUTHENTICATION_ERROR);
 	}
 }
 

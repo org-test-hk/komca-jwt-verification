@@ -46,37 +46,19 @@ public class SecurityExceptionHandler implements AuthenticationEntryPoint, Acces
 		sendErrorResponse(response, AuthErrorCode.ACCESS_DENIED);
 	}
 
-//	private void sendErrorResponse(HttpServletResponse response,
-//	                               HttpStatus status,
-//	                               String message) {
-//		try {
-//			response.setStatus(status.value());  // HTTP 상태 코드 설정
-//			response.setContentType("application/json;charset=UTF-8");  // JSON 응답 설정
-//
-//			// 에러 응답 데이터 구성
-//			Map<String, Object> errorResponse = new HashMap<>();
-//			errorResponse.put("timestamp", new Date());  // 발생 시간
-//			errorResponse.put("status", status.value());  // 상태 코드
-//			errorResponse.put("error", status.getReasonPhrase());  // 에러 설명
-//			errorResponse.put("message", message);  // 에러 메시지
-//
-//			// JSON 변환 후 응답
-//			String json = new ObjectMapper().writeValueAsString(errorResponse);
-//			response.getWriter().write(json);
-//		} catch (IOException ex) {
-//			log.error("Error sending security exception response", ex);  // 에러 발생시 로깅
-//		}
-//	}
 	private void sendErrorResponse(HttpServletResponse response, AuthErrorCode errorCode) throws IOException {
+
+		log.error("핸들러 에러");
+
 		response.setStatus(errorCode.getStatus().value());
 		response.setContentType("application/json;charset=UTF-8");
 
 		// FilterErrorResponse의 정적 팩토리 메서드 사용
-		BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
+		FilterErrorResponse.ErrorDetail errorDetail = FilterErrorResponse.ErrorDetail.builder()
 				.code(errorCode.getCode())
 				.build();
 
-		BaseResponse<Void> errorResponse = FilterErrorResponse.of(
+		BaseResponse errorResponse = FilterErrorResponse.of(
 				errorCode,
 				List.of(errorDetail)
 		).getBody();

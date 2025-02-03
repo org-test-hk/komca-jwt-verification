@@ -17,12 +17,11 @@ public class GlobalExceptionHandler {
 	private final AuthenticationLogger authLogger;
 
 	@ExceptionHandler(BaseAuthenticationException.class)
-	public ResponseEntity<BaseResponse<Void>> handleAuthException(BaseAuthenticationException e) {
+	public ResponseEntity<BaseResponse> handleAuthException(BaseAuthenticationException e) {
 		authLogger.logAuthenticationError(e);
 
-		BaseResponse.ErrorDetail errorDetail = BaseResponse.ErrorDetail.builder()
+		FilterErrorResponse.ErrorDetail errorDetail = FilterErrorResponse.ErrorDetail.builder()
 				.code(e.getErrorCode().getCode())
-				.params(e.getParams())  // params가 있으면 포함
 				.build();
 
 		return FilterErrorResponse.of(e.getErrorCode(), List.of(errorDetail));

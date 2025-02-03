@@ -11,10 +11,6 @@ import java.util.Map;
 //}
 public class TokenValidationException extends BaseAuthenticationException {
 	public TokenValidationException(Map<String, Object> details) {
-		super(AuthErrorCode.TOKEN_VALIDATION_FAILED, details);
-	}
-
-	public TokenValidationException(String message) {
-		super(AuthErrorCode.TOKEN_VALIDATION_FAILED, Map.of("message", message));
+		super(AuthErrorCode.TOKEN_VALIDATION_FAILED);
 	}
 }
