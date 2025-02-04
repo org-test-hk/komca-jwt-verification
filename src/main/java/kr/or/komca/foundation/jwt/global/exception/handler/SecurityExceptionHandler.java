@@ -35,14 +35,14 @@ public class SecurityExceptionHandler implements AuthenticationEntryPoint, Acces
 
 	/** 인증되지 않은 사용자의 요청 처리 */
 	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
 		sendErrorResponse(response, AuthErrorCode.LOGIN_REQUIRED);
 	}
 
 
 	/** 접근 권한이 없는 요청 처리 */
 	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
 		sendErrorResponse(response, AuthErrorCode.ACCESS_DENIED);
 	}
 

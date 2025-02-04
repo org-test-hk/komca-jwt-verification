@@ -17,6 +17,12 @@ public class FilterErrorResponse extends BaseResponse {
     private final List<ErrorDetail> errorDetails;
     private final String code;
 
+    private FilterErrorResponse(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
+        super(errorCode.getStatusCode());
+        this.errorDetails = errorDetails;
+        this.code = errorCode.getCode();
+    }
+
     public static ResponseEntity<BaseResponse> from(ErrorCode errorCode) {
         return ResponseEntity
                 .status(errorCode.getStatus())
@@ -24,12 +30,6 @@ public class FilterErrorResponse extends BaseResponse {
                         errorCode,
                         List.of(new ErrorDetail(errorCode.getCode(), null)))
                 );
-    }
-
-    private FilterErrorResponse(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
-        super(errorCode.getStatusCode());
-        this.errorDetails = errorDetails;
-        this.code = errorCode.getCode();
     }
 
     public static ResponseEntity<BaseResponse> of(ErrorCode errorCode, List<ErrorDetail> errorDetails) {
@@ -44,10 +44,5 @@ public class FilterErrorResponse extends BaseResponse {
     public static class ErrorDetail {
         private final String code;         // 에러 상세 코드
         private final Object value;        // 실제 입력값 (옵션)
-    }
-
-    @Override
-    public ResponseEntity<FilterErrorResponse> toResponseEntity() {
-        return ResponseEntity.status(this.statusCode).body(this);
     }
 }

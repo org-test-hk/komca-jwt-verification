@@ -26,4 +26,16 @@ public class GlobalExceptionHandler {
 
 		return FilterErrorResponse.of(e.getErrorCode(), List.of(errorDetail));
 	}
+
+	// SecurityConfig에서 발생한 에러 핸들링 추가 필요
+//	@ExceptionHandler(BaseAuthenticationException.class)
+//	public ResponseEntity<BaseResponse> handleAuthException(BaseAuthenticationException e) {
+//		authLogger.logAuthenticationError(e);
+//
+//		FilterErrorResponse.ErrorDetail errorDetail = FilterErrorResponse.ErrorDetail.builder()
+//				.code(e.getErrorCode().getCode())
+//				.build();
+//
+//		return FilterErrorResponse.of(e.getErrorCode(), List.of(errorDetail));
+//	}
 }

@@ -37,7 +37,7 @@ public class AuthUser {
 
     /** 역할 목록 */
     @Builder.Default
-    private List<Role> roles = new ArrayList<>();
+    private final List<Role> roles = new ArrayList<>();
 
     /** 등록일시 */
     private LocalDateTime regDate;

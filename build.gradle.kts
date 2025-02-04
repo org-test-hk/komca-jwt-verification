@@ -51,7 +51,7 @@ dependencies {
 
     // komca 라이브러리
     implementation("kr.or.komca:komca-data-core")
-    implementation("kr.or.komca:interface:0.2.1")
+    implementation("kr.or.komca:interface:0.2.2")
 
 //    api("kr.or.komca:interface:0.0.1-SNAPSHOT")
 

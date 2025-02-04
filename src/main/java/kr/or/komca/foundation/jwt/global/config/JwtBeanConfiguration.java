@@ -13,23 +13,5 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class JwtBeanConfiguration {
 
-	@Bean
-	@ConditionalOnMissingBean
-	public AuthenticationManager authenticationManager (
-			CustomUserDetailsService userDetailsService,  // UserDetailsService 구현체
-			PasswordEncoder passwordEncoder) {
-
-		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		provider.setUserDetailsService(userDetailsService);
-		provider.setPasswordEncoder(passwordEncoder);
-
-		return new ProviderManager(provider);
-	}
-
-	@Bean
-	@ConditionalOnMissingBean
-	public AuthenticationLogger authenticationLogger() {
-		return new AuthenticationLogger();
-	}
 
 }
