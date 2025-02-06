@@ -3,8 +3,8 @@ package kr.or.komca.foundation.jwt.global.exception.filterException;
 
 import kr.or.komca.foundation.jwt.domain.dto.response.FilterErrorResponse;
 import kr.or.komca.komcacommoninterface.dto.BaseResponse;
+import kr.or.komca.komcacommoninterface.errorcode.ErrorCode;
 import kr.or.komca.komcacommoninterface.exception.BaseException;
-import kr.or.komca.komcacommoninterface.response_code.ErrorCode;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 

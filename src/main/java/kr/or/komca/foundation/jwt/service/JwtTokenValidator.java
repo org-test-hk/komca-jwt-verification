@@ -60,6 +60,8 @@ public class JwtTokenValidator {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
+
+        // TODO: User -> CustomUser로 변경 필요
         UserDetails principal = User.builder()
                 .username(claims.getSubject())
                 .password("")

@@ -1,0 +1,13 @@
+# 구동 테스트용
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//database-1.czuc4meqeb9b.ap-northeast-2.rds.amazonaws.com:1521/testdb
+    username: kun
+    password: 1111
+    driver-class-name: oracle.jdbc.OracleDriver  # Oracle JDBC
+
+jwt:
+  secret: ${JWT_SECRET:RGV2ZWxvcG1lbnQgU3ByaW5nIEJvb3QgSldUIFNlY3JldCBLZXkgZm9yIFNpZ25pbmcgVG9rZW5z}
+  access-token-validity: ${JWT_ACCESS_VALIDITY:1800}
+  refresh-token-validity: ${JWT_REFRESH_VALIDITY:18000}

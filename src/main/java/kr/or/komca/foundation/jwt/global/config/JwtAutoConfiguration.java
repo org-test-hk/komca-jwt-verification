@@ -35,7 +35,6 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class JwtAutoConfiguration {
 
-
 	@Bean
 	public CustomUserDetailsService customUserDetailsService(UserQueryMapper userQueryMapper) {
 		return new CustomUserDetailsService(userQueryMapper);
@@ -83,14 +82,15 @@ public class JwtAutoConfiguration {
 	}
 
 	@Bean
+	@ConditionalOnMissingBean
 	public JwtTokenValidator jwtTokenValidator(TokenVerificationCommandService tokenCommandService, JwtProperties jwtProperties) {
 		return new JwtTokenValidator(
 				jwtProperties, tokenCommandService
 		);
 	}
 
-
 	@Bean
+	@ConditionalOnMissingBean
 	public JwtAuthenticationFilter jwtAuthenticationFilter(
 			JwtTokenValidator jwtTokenValidator,
 			TokenVerificationCommandService tokenCommandService,

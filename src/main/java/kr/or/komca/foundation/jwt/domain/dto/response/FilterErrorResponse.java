@@ -3,7 +3,7 @@ package kr.or.komca.foundation.jwt.domain.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import kr.or.komca.komcacommoninterface.dto.BaseResponse;
-import kr.or.komca.komcacommoninterface.response_code.ErrorCode;
+import kr.or.komca.komcacommoninterface.errorcode.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
